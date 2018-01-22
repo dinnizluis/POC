@@ -1,0 +1,1 @@
+Entender matrizes sendo somadas na função de custo
