@@ -15,7 +15,7 @@ from sklearn.covariance import EllipticEnvelope
 #Loading the dataset
 df = pd.read_csv("KDDTrain+_20Percent.csv") 
 #Deleting labels and string features
-df = df.drop(df.columns[[1, 2, 3, 41, 42]], axis=1)
+df = df.drop(df.columns[[1, 2, 3, 41, 42]], axis=1) #Indices of the non wanted columns [read features]
 
 #EllipticEnvelope
 #Binary function
