@@ -19,13 +19,18 @@ df = df.drop(df.columns[[1, 2, 3, 41, 42]], axis=1) #Indices of the non wanted c
 
 #EllipticEnvelope
 #Binary function
-#outlier_frac = 1
-#ell = EllipticEnvelope(contamination=outlier_frac)
-#ell.fit(df)
+outlier_frac = 1
+ell = EllipticEnvelope(contamination=outlier_frac)
+ell.fit(df)
 
 #pred = ell.predict(df)
 #print(sum(pred == -1))
 
 #Continuous Function
 decision = ell.decision_function(df)
-#decision.min(), decision.max()
+print(decision.min())
+print(decision.max())
+
+# Get the "thresholding" value from the decision function
+#threshold = stats.scoreatpercentile(ell, 100*outlier_frac)
+#print(threshold)
