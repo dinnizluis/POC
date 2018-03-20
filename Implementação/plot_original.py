@@ -5,26 +5,34 @@
 from pylab import *
 import matplotlib.pyplot as plt 
 import pandas as pd 
+from sklearn import preprocessing
 
-df = pd.read_csv("KDDTest+_probe.csv", sep = '\t')
-#print(df['Duration'])
-#print(df.columns)
+df = pd.read_csv("KDDTest.csv", sep = '\t')
+
 x1 = []
 y1 = []
 x2 = []
 y2 = []
 
-for index, row in df.iterrows():
-	if(df['label'][index] == 1):
-		x1.append(df['Duration'][index])
-		y1.append(df['Scr_bytes'][index])
-	else:
-		x2.append(df['Duration'][index])
-		y2.append(df['Scr_bytes'][index])
+x1 = df[df['label'] == 1]
+y1 = df[df['label'] == 1]
+x2 = df[df['label'] == 0]
+y2 = df[df['label'] == 0]
+
+norm_x1 = x1.drop(['Scr_bytes', 'label'], axis = 1)
+#norm_x1 = preprocessing.normalize(norm_x1)
+norm_y1 = y1.drop(['Duration', 'label'], axis = 1)
+#norm_y1 = preprocessing.normalize(norm_y1)
+norm_x2 = x2.drop(['Scr_bytes', 'label'], axis = 1)
+#norm_x2 = preprocessing.normalize(norm_x2)
+norm_y2 = y2.drop(['Duration', 'label'], axis = 1)
+#norm_y2 = preprocessing.normalize(norm_y2)
 
 figure()
-plot(x1, y1, 'bo')
-plot(x2, y2, 'r+')
+plot(norm_x1, norm_y1, 'bo')
+plot(norm_x2, norm_y2, 'r+')
+yscale('log')
+xscale('log')
 xlabel('Duration')
 ylabel('Source Bytes')
 title('Original data')
