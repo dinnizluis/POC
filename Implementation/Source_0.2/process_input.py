@@ -49,7 +49,6 @@ df = preprocessing.normalize(df)
 #Step 7 :: Export df to csv
 df = pd.DataFrame(data = df)
 labels = pd.DataFrame(data = labels)
-path_out  = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Output/'
-df.to_csv(path_out+'nslkdd.csv', sep='\t')
-labels.to_csv(path_out+'labels.csv', sep='\t')
+df.to_csv(path_in+'nslkdd.csv', sep='\t')
+labels.to_csv(path_in+'labels.csv', sep='\t')
 print('Results successfully exported')
