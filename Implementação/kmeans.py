@@ -2,9 +2,11 @@ import pandas as pd
 from sklearn import cluster
 
 #Loading the dataset
-df = pd.read_csv("KDDTest+_probe_no_label.csv", sep='\t') 
+df = pd.read_csv("KDD_DoS_pca.csv", sep='\t') 
 #df = pd.read_csv("KDDTrain+_20Percent_pcd_no_label.csv", sep='\t') 
-y = pd.read_csv("KDDTest+_probe.csv", sep='\t')
+y = pd.read_csv("KDD_DoS_pca_label.csv", sep='\t')
+
+print(y.columns)
 
 k_means = cluster.KMeans(n_clusters = 2)
 k_means.fit(df)
@@ -37,17 +39,19 @@ probe_k = 0
 for index, row in df.iterrows():
 	if(k_means.labels_[index] == 1):
 		probe_k += 1
-		x1.append(df['Duration'][index])
-		y1.append(df['Scr_bytes'][index])
+		x1.append(df.columns[[0]][index])
+		y1.append(df.columns[[1]][index])
 	else:
 		regular_k += 1
-		x2.append(df['Duration'][index])
-		y2.append(df['Scr_bytes'][index])
+		x2.append(df.columns[[0]][index])
+		y2.append(df.columns[[1]][index])
 
 figure()
-plot(x1, y1, 'bo')
-plot(x2, y2, 'r+')
-xlabel('Duration')
-ylabel('Source Bytes')
+plot(x1, y1, 'r+')
+plot(x2, y2, 'bo')
+xlabel('F1')
+ylabel('F2')
+xscale('log')
+yscale('log')
 title('K Means')
 show()

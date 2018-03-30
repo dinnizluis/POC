@@ -36,6 +36,9 @@ for index, row in df.iterrows():
 #Dropping anomalous instaces and not of DoS class
 df.drop(df.index[ind], inplace = True)
 
+df = df.reset_index(drop=True)
+
+
 #Dropping binary features
 df = df.drop(['Land', 'Logged_in', 'Root_shell', 'Su_attempted', 'Is_host_login', 'Is_guest_login'], axis = 1)
 #Dropping nominal features
@@ -52,12 +55,13 @@ df = df.drop(['label', 'num'], axis = 1)
 pca = PCA(n_components = 2)
 df_ = df.values
 pca.fit(df_)
+df_ = pca.transform(df_)
 df = pd.DataFrame(data = df_)
-print(len(df_))
-print(df.shape)
-#df['label'] = labels
-#print(df)
-#df.to_csv('KDD_DoS.csv', sep = '\t', index = False)
 
-#df['label'] = labels
-#df.to_csv('KDD_DoS_label.csv', sep = '\t', index = False)
+#Exporto to csv file data without labels
+df.to_csv('KDD_DoS_pca.csv', sep = '\t', index = False)
+
+#Add the labels to the data and export to a csv file
+df['label'] = labels
+print(df)
+df.to_csv('KDD_DoS_pca_label.csv', sep = '\t', index = False)
