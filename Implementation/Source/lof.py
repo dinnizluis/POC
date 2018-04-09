@@ -20,12 +20,25 @@ clf = LocalOutlierFactor(n_neighbors=20, contamination=0.4)
 
 y_7d = clf.fit_predict(x_7d)
 y_7d = pd.DataFrame(data=y_7d)
+# Change the -1 label to 0
+for index, row in y_7d.iterrows():
+	if(y_7d[0][index] == -1):
+		y_7d[0][index] = 0
 
 y_3d = clf.fit_predict(x_3d)
 y_3d = pd.DataFrame(data=y_3d)
+# Change the -1 label to 0
+for index, row in y_3d.iterrows():
+	if(y_3d[0][index] == -1):
+		y_3d[0][index] = 0
 
 y_2d = clf.fit_predict(x_2d)
 y_2d = pd.DataFrame(data=y_2d)
+# Change the -1 label to 0
+for index, row in y_2d.iterrows():
+	if(y_2d[0][index] == -1):
+		y_2d[0][index] = 0
+
 
 # Step 4 :: Export results
 y_7d.to_csv(path_out + 'lof7f.csv', sep='\t', index=False)

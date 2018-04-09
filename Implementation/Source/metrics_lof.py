@@ -23,14 +23,14 @@ crtb3 = pd.crosstab(y['label'], lof3['0'], rownames=['Observed'], colnames=['Pre
 crtb2 = pd.crosstab(y['label'], lof2['0'], rownames=['Observed'], colnames=['Predicted'], margins=True)
 
 # Definition of precision :: Of all predicted y = 1, what fraction was actually y = 1?
-precision_lof7 = precision_score(y['label'], lof7['0'], average=None)
-precision_lof3 = precision_score(y['label'], lof3['0'], average=None)
-precision_lof2 = precision_score(y['label'], lof2['0'], average=None)
+precision_lof7 = precision_score(y['label'], lof7['0'], average='binary')
+precision_lof3 = precision_score(y['label'], lof3['0'], average='binary')
+precision_lof2 = precision_score(y['label'], lof2['0'], average='binary')
 
 # Definition of recall :: Of all y = 1, what did we correct predict y = 1?
-recall_lof7 = recall_score(y['label'], lof7['0'], average=None)
-recall_lof3 = recall_score(y['label'], lof3['0'], average=None)
-recall_lof2 = recall_score(y['label'], lof2['0'], average=None)
+recall_lof7 = recall_score(y['label'], lof7['0'], average='binary')
+recall_lof3 = recall_score(y['label'], lof3['0'], average='binary')
+recall_lof2 = recall_score(y['label'], lof2['0'], average='binary')
 
 # Definition of accuracy :: Fraction of predictions the model got right
 acc_lof7 = accuracy_score(y['label'], lof7['0'], normalize=True)
