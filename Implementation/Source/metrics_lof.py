@@ -38,14 +38,14 @@ acc_lof3 = accuracy_score(y['label'], lof3['0'], normalize=True)
 acc_lof2 = accuracy_score(y['label'], lof2['0'], normalize=True)
 
 # Step 4 :: Export results
-crtb7.to_csv(path_out + 'crosstabLOF7.csv', sep='\t')
-crtb3.to_csv(path_out + 'crosstabLOF3.csv', sep='\t')
-crtb2.to_csv(path_out + 'crosstabLOF2.csv', sep='\t')
+crtb7.to_csv(path_out + 'lof7_crosstab.csv', sep='\t')
+crtb3.to_csv(path_out + 'lof3_crosstab.csv', sep='\t')
+crtb2.to_csv(path_out + 'lof2_crosstab.csv', sep='\t')
 
 data = [{'Precision': precision_lof7, 'Recall': recall_lof7, 'Accuracy': acc_lof7},
 		{'Precision': precision_lof3, 'Recall': recall_lof3, 'Accuracy': acc_lof3},
 		{'Precision': precision_lof2, 'Recall': recall_lof2, 'Accuracy': acc_lof2}]
 index = ['7 Features', '3 Features', '2 Features']
 metrics = pd.DataFrame(data=data, index=index)
-metrics.to_csv(path_out + 'metricsLOF.csv', sep='\t')
+metrics.to_csv(path_out + 'lof_metrics.csv', sep='\t')
 print('Data successfully exported!')
