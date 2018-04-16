@@ -7,10 +7,10 @@ from sklearn.metrics import *
 path_in = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Input/'
 path_out = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Output/'
 
-def performance(algorith_name, path_in=path_in, path_out=path_out, y='labels', label='label', pred='0'):
-	x7 = pd.read_csv(path_out+algorith_name+'7f.csv',sep='\t')
-	x3 = pd.read_csv(path_out+algorith_name+'3f.csv',sep='\t')
-	x2 = pd.read_csv(path_out+algorith_name+'2f.csv',sep='\t')
+def performance(algorithm_name, path_in=path_in, path_out=path_out, y='labels', label='label', pred='0'):
+	x7 = pd.read_csv(path_out+algorithm_name+'7f.csv',sep='\t')
+	x3 = pd.read_csv(path_out+algorithm_name+'3f.csv',sep='\t')
+	x2 = pd.read_csv(path_out+algorithm_name+'2f.csv',sep='\t')
 	y = pd.read_csv(path_in + 'labels.csv', sep='\t')
 
 	# Step 3 :: Do calculations
@@ -33,15 +33,14 @@ def performance(algorith_name, path_in=path_in, path_out=path_out, y='labels', l
 	acc_x3 = accuracy_score(y['label'], x3['0'], normalize=True)
 	acc_x2 = accuracy_score(y['label'], x2['0'], normalize=True)
 
-	# Step 4 :: Export results
-	crtb7.to_csv(path_out + algorith_name + '7_crosstab.csv', sep='\t')
-	crtb3.to_csv(path_out + algorith_name + '3_crosstab.csv', sep='\t')
-	crtb2.to_csv(path_out + algorith_name + '2_crosstab.csv', sep='\t')
+	# Area Under the ROC Curve
+	auc_x7 = roc_auc_score(y['label'], x7['0'])
+	auc_x3 = roc_auc_score(y['label'], x3['0'])
+	auc_x2 = roc_auc_score(y['label'], x2['0'])
 
-	data = [{'Precision': precision_x7, 'Recall': recall_x7, 'Accuracy': acc_x7},
-			{'Precision': precision_x3, 'Recall': recall_x3, 'Accuracy': acc_x3},
-			{'Precision': precision_x2, 'Recall': recall_x2, 'Accuracy': acc_x2}]
+	data = [{'Precision': precision_x7, 'Recall': recall_x7, 'Accuracy': acc_x7, 'AUC': auc_x7},
+			{'Precision': precision_x3, 'Recall': recall_x3, 'Accuracy': acc_x3, 'AUC': auc_x3},
+			{'Precision': precision_x2, 'Recall': recall_x2, 'Accuracy': acc_x2, 'AUC': auc_x2}]
 	index = ['7 Features', '3 Features', '2 Features']
 	metrics = pd.DataFrame(data=data, index=index)
-	metrics.to_csv(path_out + algorith_name+'_metrics.csv', sep='\t')
-	print('Data successfully exported!')
+	return metrics, crtb7, crtb3, crtb2
