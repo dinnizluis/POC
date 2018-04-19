@@ -14,7 +14,7 @@ x_3d = pd.read_csv(path_out + 'nslkdd3d.csv', sep='\t')
 x_2d = pd.read_csv(path_out + 'nslkdd2d.csv', sep='\t')
 
 # Step 3 :: Fit the data
-clf = EllipticEnvelope(contamination=0.4)
+clf = EllipticEnvelope(contamination=0.4, random_state=0, assume_centered=True)
 clf.fit(x_7d)
 y_7d = clf.predict(x_7d)
 y_7d = pd.DataFrame(data=y_7d)
@@ -44,3 +44,15 @@ y_7d.to_csv(path_out + 'ellipticEnvelope7f.csv', sep='\t', index=False)
 y_3d.to_csv(path_out + 'ellipticEnvelope3f.csv', sep='\t', index=False)
 y_2d.to_csv(path_out + 'ellipticEnvelope2f.csv', sep='\t', index=False)
 print('Data successfully exported!')
+
+# Calculate the performance of the algorithm
+from metrics import *
+
+algorithm_name = 'ellipticEnvelope'
+metrics, crtb7, crtb3, crtb2 = performance(algorithm_name)
+
+crtb7.to_csv(path_out + algorithm_name + '7_crosstab.csv', sep='\t')
+crtb3.to_csv(path_out + algorithm_name + '3_crosstab.csv', sep='\t')
+crtb2.to_csv(path_out + algorithm_name + '2_crosstab.csv', sep='\t')
+metrics.to_csv(path_out + algorithm_name +'_metrics.csv', sep='\t')
+print('Data successfully exported - stats!')

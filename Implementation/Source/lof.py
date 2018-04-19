@@ -45,3 +45,15 @@ y_7d.to_csv(path_out + 'lof7f.csv', sep='\t', index=False)
 y_3d.to_csv(path_out + 'lof3f.csv', sep='\t', index=False)
 y_2d.to_csv(path_out + 'lof2f.csv', sep='\t', index=False)
 print('Data successfully exported!')
+
+# Calculate the performance of the algorithm
+from metrics import *
+
+algorithm_name = 'lof'
+metrics, crtb7, crtb3, crtb2 = performance(algorithm_name)
+
+crtb7.to_csv(path_out + algorithm_name + '7_crosstab.csv', sep='\t')
+crtb3.to_csv(path_out + algorithm_name + '3_crosstab.csv', sep='\t')
+crtb2.to_csv(path_out + algorithm_name + '2_crosstab.csv', sep='\t')
+metrics.to_csv(path_out + algorithm_name +'_metrics.csv', sep='\t')
+print('Data successfully exported - stats!')
