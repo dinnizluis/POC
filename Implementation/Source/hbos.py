@@ -7,11 +7,23 @@ import numpy as np
 # Step 2 :: Load data
 path_in = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Input/'
 path_out = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Output/'
-x_7d = pd.read_csv(path_in + 'nslkdd.csv', sep='\t')
-x_3d = pd.read_csv(path_out + 'nslkdd3d.csv', sep='\t')
-x_2d = pd.read_csv(path_out + 'nslkdd2d.csv', sep='\t')
+x = pd.read_csv(path_in + 'nslkdd_complete.csv', sep='\t')
+x_7d = pd.read_csv(path_in + 'nslkdd_7f.csv', sep='\t')
+x_3d = pd.read_csv(path_in + 'nslkdd_3f.csv', sep='\t')
+x_2d = pd.read_csv(path_in + 'nslkdd_2f.csv', sep='\t')
 
 hbos = HBOS()
+
+y = hbos.fit_predict(x)
+y = pd.DataFrame(data = y)
+dif =  (np.amax(y.values) - np.amin(y.values))/2.0
+threshold = dif + 0.5 * np.amin(y.values)
+# Change the labels to 0 and 1
+for index, row in y.iterrows():
+	if(y[0][index] < threshold):
+		y[0][index] = 0
+	else:
+		y[0][index] = 1
 
 y_7d = hbos.fit_predict(x_7d)
 y_7d = pd.DataFrame(data=y_7d)
@@ -47,6 +59,7 @@ for index, row in y_2d.iterrows():
 		y_2d[0][index] = 1
 
 # Step 4 :: Export results
+y.to_csv(path_out+'hbos_complete.csv', sep='\t', index=False)
 y_7d.to_csv(path_out + 'hbos7f.csv', sep='\t', index=False)
 y_3d.to_csv(path_out + 'hbos3f.csv', sep='\t', index=False)
 y_2d.to_csv(path_out + 'hbos2f.csv', sep='\t', index=False)
@@ -56,8 +69,9 @@ print('Data successfully exported!')
 from metrics import *
 
 algorithm_name = 'hbos'
-metrics, crtb7, crtb3, crtb2 = performance(algorithm_name)
+metrics, crtb, crtb7, crtb3, crtb2 = performance(algorithm_name)
 
+crtb.to_csv(path_out + algorithm_name + '32_crosstab.csv', sep='\t')
 crtb7.to_csv(path_out + algorithm_name + '7_crosstab.csv', sep='\t')
 crtb3.to_csv(path_out + algorithm_name + '3_crosstab.csv', sep='\t')
 crtb2.to_csv(path_out + algorithm_name + '2_crosstab.csv', sep='\t')
