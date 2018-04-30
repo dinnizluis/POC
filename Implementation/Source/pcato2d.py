@@ -10,7 +10,7 @@ from sklearn.decomposition import PCA
 
 #Step 2 :: Load the input data
 path_in = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Input/'
-df_7_d = pd.read_csv(path_in+'nslkdd.csv', sep='\t')
+df_7_d = pd.read_csv(path_in+'nslkdd_7f.csv', sep='\t')
 
 #Step 3 :: Fit the data
 pca = PCA(n_components = 2)
@@ -22,9 +22,7 @@ df_2_d = pca.transform(df_7_d)
 
 #Step 4.5 :: Convert to df
 df_2_d = pd.DataFrame(data = df_2_d)
-print(df_2_d)
 
 #Step 5 :: Export to csv
-path_out = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Output/'
-df_2_d.to_csv(path_out+'nslkdd2d.csv', sep='\t', index = False)
+df_2_d.to_csv(path_in+'nslkdd_2f.csv', sep='\t', index = False)
 print('Data successfully exported!')

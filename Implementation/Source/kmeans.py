@@ -12,12 +12,16 @@ import pandas as pd
 #Step 2 :: Load data
 path_in = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Input/'
 path_out = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Output/'
-x_7d = pd.read_csv(path_in + 'nslkdd.csv', sep='\t')
-x_3d = pd.read_csv(path_out + 'nslkdd3d.csv', sep='\t')
-x_2d = pd.read_csv(path_out + 'nslkdd2d.csv', sep='\t')
+x = pd.read_csv(path_in + 'nslkdd_complete.csv', sep='\t')
+x_7d = pd.read_csv(path_in + 'nslkdd_7f.csv', sep='\t')
+x_3d = pd.read_csv(path_in + 'nslkdd_3f.csv', sep='\t')
+x_2d = pd.read_csv(path_in + 'nslkdd_2f.csv', sep='\t')
 
 #Step 3 :: Execute KMeans
 k_means = cluster.KMeans(n_clusters = 2, init='random' ,n_init=100, random_state=0)
+
+k_means.fit(x)
+y = pd.DataFrame(data=k_means.labels_)
 
 k_means.fit(x_7d)
 y_7d = pd.DataFrame(data=k_means.labels_)
@@ -29,6 +33,7 @@ k_means.fit(x_2d)
 y_2d = pd.DataFrame(data=k_means.labels_)
 
 #Step 4 :: Export results
+y.to_csv(path_out+'kmeans_complete.csv', sep='\t', index=False)
 y_7d.to_csv(path_out+'kmeans7f.csv', sep='\t', index=False)
 y_3d.to_csv(path_out+'kmeans3f.csv', sep='\t', index=False)
 y_2d.to_csv(path_out+'kmeans2f.csv', sep='\t', index=False)
@@ -38,8 +43,9 @@ print('Data successfully exported!')
 from metrics import *
 
 algorithm_name = 'kmeans'
-metrics, crtb7, crtb3, crtb2 = performance(algorithm_name)
+metrics, crtb, crtb7, crtb3, crtb2 = performance(algorithm_name)
 
+crtb.to_csv(path_out + algorithm_name + '32_crosstab.csv', sep='\t')
 crtb7.to_csv(path_out + algorithm_name + '7_crosstab.csv', sep='\t')
 crtb3.to_csv(path_out + algorithm_name + '3_crosstab.csv', sep='\t')
 crtb2.to_csv(path_out + algorithm_name + '2_crosstab.csv', sep='\t')
