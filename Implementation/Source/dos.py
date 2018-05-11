@@ -47,6 +47,6 @@ for i in range(0, len(algorithm)):
 
 	data.append({'Expected ': len(ind), 'Actual DoS ': tp, 'Other attacks ': fp})
 
-results = pd.DataFrame(data=data)
+results = pd.DataFrame(data=data, index=algorithm)
 print(results)
-results.to_csv(path_out + 'dos.csv', sep='\t', index=False)
+results.to_csv(path_out + 'dos.csv', sep='\t')
