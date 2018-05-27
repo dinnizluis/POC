@@ -30,10 +30,10 @@ df = df.drop(['Protocol_type', 'Service', 'Flag', 'Land', 'Logged_in', 'Root_she
 
 
 #Step 5 :: Save indexes of not DoS attack instances
-dos_n_normal = ['back', 'land', 'neptune', 'pod', 'smurf', 'teardrop', 'apache2', 'udpstorm', 'processtable', 'worm', 'normal']
+probe_n_normal = ['satan', 'ipsweep', 'nmap', 'portsweep', 'mscan', 'saint', 'normal']
 ind = []
 for index, row in df.iterrows():
-	if(df['label'][index] not in dos_n_normal):
+	if(df['label'][index] not in probe_n_normal):
 		ind.append(index) 
 
 #Step 6 :: Save and export labels for precision calculation
@@ -43,8 +43,6 @@ print('Labels 32: ' + str(labels_32.shape))
 labels_32 = pd.DataFrame(data = labels_32)
 labels_32.to_csv(path_in + 'labels_32.csv', sep='\t', index = False)
 df = df.drop(['label', 'num'], axis=1)
-
-print('DF 32: ' + str(df.shape))
 
 
 #Step 7 :: Normalize features
@@ -64,7 +62,7 @@ labels = pd.DataFrame(data = labels_32)
 labels.to_csv(path_in +'labels.csv', sep='\t', index = False)
 
 #Step 10 :: Select the relevant features
-df_7 = df_7[['Duration', 'Scr_bytes', 'Count', 'Srv_rerror_rate', 'Dst_host_same_srv_rate', 'Dst_host_srv_serror_rate', 'Dst_host_srv_rerror_rate']]
+df_7 = df_7[['Duration', 'Scr_bytes']]
 df_7 = preprocessing.normalize(df_7)
 
 #Step 11 :: Export df_7 to csv
@@ -73,5 +71,5 @@ df_7 = pd.DataFrame(data = df_7)
 print('Labels 07: ' + str(labels.shape))
 print('DF 07: ' + str(df_7.shape))
 
-df_7.to_csv(path_in + 'nslkdd_7f.csv', sep='\t', index = False)
+df_7.to_csv(path_in + 'nslkdd_probe.csv', sep='\t', index = False)
 print('7 features dataset successfully exported')

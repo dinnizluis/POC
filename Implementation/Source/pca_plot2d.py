@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 
 #Step 2 :: Load the data
-path_in = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Input/'
-path_out = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Output/'
+path_in = '../Input/'
+path_out = '../Output/'
 x = pd.read_csv(path_out+'nslkdd2d.csv', sep='\t')
 label = pd.read_csv(path_in+'labels.csv', sep='\t')
 x['label'] = label

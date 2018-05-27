@@ -9,8 +9,8 @@ from sklearn.neighbors import LocalOutlierFactor
 import matplotlib.pyplot as plt 
 
 # Step 2 :: Load data
-path_in = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Input/'
-path_out = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Output/'
+path_in = '../Input/'
+path_out = '../Output/'
 x = pd.read_csv(path_in + 'nslkdd_complete.csv', sep='\t')
 x_7d = pd.read_csv(path_in + 'nslkdd_7f.csv', sep='\t')
 x_3d = pd.read_csv(path_in + 'nslkdd_3f.csv', sep='\t')

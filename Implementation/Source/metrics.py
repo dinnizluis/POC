@@ -4,8 +4,8 @@ import pandas as pd
 from sklearn.metrics import *
 
 # Step 2 :: Load data
-path_in = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Input/'
-path_out = '/Users/dinnizluis/Dropbox/Computer Science/00_20132018_Atividades Extracurriculares/Iniciação Científica/Análise de Dados/POC/Implementation/Output/'
+path_in = '../Implementation/Input/'
+path_out = '../Output/'
 
 def performance(algorithm_name, path_in=path_in, path_out=path_out, y='labels', label='label', pred='0'):
 	x = pd.read_csv(path_out+algorithm_name+'_complete.csv', sep='\t')
