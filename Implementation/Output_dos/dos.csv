@@ -1,6 +1,0 @@
-	Actual DoS 	Expected 	Other attacks 
-kmeans	5574	53093	71907
-lof	36382	53093	52727
-isolationForest	41299	53093	47810
-ellipticEnvelope	34776	53093	54333
-hbos	3387	53093	9142
