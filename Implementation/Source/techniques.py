@@ -10,6 +10,8 @@ from sklearn.ensemble import IsolationForest
 
 def run_ellipticEnvelope(x, contamination=0.1):
 	clf = EllipticEnvelope(contamination=contamination, random_state=0, assume_centered=True)
+	numeric_cols = [col for col in x if x[col].dtype.kind != 'O']
+	x[numeric_cols] += 0.0000000001
 	clf.fit(x)
 	y = clf.predict(x)
 	y = pd.DataFrame(data=y)

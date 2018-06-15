@@ -187,4 +187,18 @@ def get_auc(attack):
 		ans.columns = columns
 		return ans	
 
-print(get_auc(1))
+dos_rs = get_auc(1)
+u2r_rs = get_auc(2)
+r2l_rs = get_auc(3)
+probe_rs = get_auc(4)
+
+print(dos_rs)
+print(u2r_rs)
+print(r2l_rs)
+print(probe_rs)
+
+dos_rs.to_csv('../Output/dos_results.csv', sep='\t')
+u2r_rs.to_csv('../Output/u2r_results.csv', sep='\t')
+r2l_rs.to_csv('../Output/r2l_results.csv', sep='\t')
+probe_rs.to_csv('../Output/probe_results.csv', sep='\t')
+print('Results successfully exported!')
